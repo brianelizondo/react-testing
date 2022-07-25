@@ -7,31 +7,54 @@ import Card from "./Card";
 
 function Carousel(props) {
   const [cardIdx, setCardIdx] = useState(0);
+  const [isShowingRight, setIsShowingRight] = useState(true);
+  const [isShowingLeft, setIsShowingLeft] = useState(false);
+  
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
-  const goForward = () => setCardIdx(cardIdx + 1);
-  const goRearward = () => setCardIdx(cardIdx - 1);
+
+  function arrowsShowHide(nextImg){
+    let showArrow;
+    showArrow = (nextImg == total - 1) ? false : true;
+    setIsShowingRight(showArrow);
+
+    showArrow = nextImg > 0 ? true : false;
+    setIsShowingLeft(showArrow);
+  }
+  
+  const goForward = () => {
+    let nextImg = (cardIdx + 1) >= total ? 0 : cardIdx + 1;
+    setCardIdx(nextImg);
+    
+    arrowsShowHide(nextImg);
+  };
+  const goBackward = () => {
+    let backImg = (cardIdx - 1) < 0 ? 2 : cardIdx - 1;
+    setCardIdx(backImg);
+    
+    arrowsShowHide(backImg);
+  };
 
   return (
     <div className="Carousel">
       <h1>{props.title}</h1>
       <div className="Carousel-main">
-        <i
+        { isShowingLeft && <i
           className="fas fa-chevron-circle-left fa-2x"
-          onClick={goRearward}
-          data-testid="left-arrow"
-        />
+          onClick={goBackward}
+          data-testid="left-arrow"/>
+        }
         <Card
           caption={card.caption}
           src={card.src}
           currNum={cardIdx + 1}
           totalNum={total}
         />
-        <i
+        { isShowingRight && <i
           className="fas fa-chevron-circle-right fa-2x"
           onClick={goForward}
-          data-testid="right-arrow"
-        />
+          data-testid="right-arrow"/>
+        }
       </div>
     </div>
   );

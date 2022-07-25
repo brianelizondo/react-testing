@@ -49,3 +49,35 @@ it("works when you click on the left arrow", function() {
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
 });
+
+it("works when you click on the left/right arrow show/hidden", function() {
+  const { queryByTestId } = render(<Carousel />);
+
+  // expect the right arrow is show, but not the left arrow
+  expect(queryByTestId("right-arrow")).toBeInTheDocument();
+  expect(queryByTestId("left-arrow")).not.toBeInTheDocument();
+
+  // move forward in the carousel
+  const rightArrow = queryByTestId("right-arrow");
+  fireEvent.click(rightArrow);
+
+  // expect the left and right arrows are show
+  expect(queryByTestId("right-arrow")).toBeInTheDocument();
+  expect(queryByTestId("left-arrow")).toBeInTheDocument();
+
+  // move forward in the carousel
+  fireEvent.click(rightArrow);
+
+  // expect the left arrow is show, but not the right arrow
+  expect(queryByTestId("right-arrow")).not.toBeInTheDocument();
+  expect(queryByTestId("left-arrow")).toBeInTheDocument();
+
+  // move 2 places backware in the carousel
+  const leftArrow = queryByTestId("left-arrow");
+  fireEvent.click(leftArrow);
+  fireEvent.click(leftArrow);
+
+  // expect the right arrow is show, but not the left arrow
+  expect(queryByTestId("right-arrow")).toBeInTheDocument();
+  expect(queryByTestId("left-arrow")).not.toBeInTheDocument();
+});
