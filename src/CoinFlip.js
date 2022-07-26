@@ -27,7 +27,7 @@ function CoinFlip(props) {
         <div className="CoinFlip">
             <h1>Let's flip a coin</h1>
             <Coin src={ coinData.src } face={ coinData.face } isShow={ coinData.isShow } />
-            <div className="CoinFlip-button"><button onClick={ newFlip }>flip meeee</button></div>
+            <div className="CoinFlip-button"><button onClick={ newFlip } data-testid="flip-me">flip meeee</button></div>
             <div className="CoinFlip-track">
                 Out of <b>{ flips }</b> flips, 
                 there haven been <b>{ flipsHead } heads </b> 
