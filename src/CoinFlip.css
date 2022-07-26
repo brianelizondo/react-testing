@@ -1,0 +1,21 @@
+.CoinFlip{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 100px;
+}
+.CoinFlip-button{
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.CoinFlip-button button{ 
+    border-radius: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+}
+.CoinFlip-button button:hover{ 
+    background-color: gray;
+    color: white;
+}
+.CoinFlip-track{
+    font-size: 10px;
+}
